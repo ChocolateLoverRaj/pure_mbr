@@ -6,17 +6,8 @@ use zerocopy::{FromBytes, Immutable, IntoBytes, little_endian::U32};
 #[derive(Debug, FromBytes, IntoBytes, Immutable)]
 pub struct GenericMbr {
     unused: [u8; 446],
-    partition_entries: [PartitionEntry; 4],
+    pub partition_entries: [PartitionEntry; 4],
     boot_signature: [u8; 2],
-}
-
-impl GenericMbr {
-    /// Iterates through non-empty partitions
-    pub fn partitions(&self) -> impl Iterator<Item = &PartitionEntry> {
-        self.partition_entries
-            .iter()
-            .filter(|entry| !entry.is_empty())
-    }
 }
 
 #[repr(C)]
@@ -61,7 +52,11 @@ mod test {
     #[test]
     fn example() {
         let mbr: &GenericMbr = transmute_ref!(include_bytes!("../example.bin"));
-        for partition in mbr.partitions() {
+        for partition in mbr
+            .partition_entries
+            .iter()
+            .filter(|entry| !entry.is_empty())
+        {
             println!("partition: {partition:#?}");
         }
     }
