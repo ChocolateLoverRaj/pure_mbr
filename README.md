@@ -1,4 +1,7 @@
 # `pure_mbr`
+[![Crates.io Version](https://img.shields.io/crates/v/pure_mbr)](https://crates.io/crates/pure_mbr)
+[![docs.rs](https://img.shields.io/docsrs/pure_mbr)](https://docs.rs/pure_mbr/latest/pure_mbr/)
+
 A Rust library to parse the [master boot record (MBR)](https://en.wikipedia.org/wiki/Master_boot_record).
 
 ## Features
