@@ -1,5 +1,6 @@
-#![cfg_attr(not(feature = "std"), no_std)]
+#![cfg_attr(not(test), no_std)]
 
+pub use zerocopy;
 use zerocopy::{FromBytes, Immutable, IntoBytes, little_endian::U32};
 
 #[repr(C)]
@@ -27,7 +28,7 @@ impl PartitionEntry {
         self.partition_type() == 0x00
     }
 
-    /// See https://en.wikipedia.org/wiki/Partition_type#List_of_partition_IDs for the meaning of this
+    /// See <https://en.wikipedia.org/wiki/Partition_type#List_of_partition_IDs> for the meaning of this
     pub fn partition_type(&self) -> u8 {
         self.partition_type
     }
@@ -38,7 +39,7 @@ impl PartitionEntry {
     }
 
     /// Returns the number of sectors (1 sector = 512 bytes) of this partition
-    pub fn sector_len(&self) -> u32 {
+    pub fn n_sectors(&self) -> u32 {
         self.n_sectors.into()
     }
 }
