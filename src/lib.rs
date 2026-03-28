@@ -43,22 +43,3 @@ impl PartitionEntry {
         self.n_sectors.into()
     }
 }
-
-#[cfg(test)]
-mod test {
-    use zerocopy::transmute_ref;
-
-    use crate::GenericMbr;
-
-    #[test]
-    fn example() {
-        let mbr: &GenericMbr = transmute_ref!(include_bytes!("../example.bin"));
-        for partition in mbr
-            .partition_entries
-            .iter()
-            .filter(|entry| !entry.is_empty())
-        {
-            println!("partition: {partition:#?}");
-        }
-    }
-}

@@ -28,7 +28,7 @@
             buildInputs = [
               rust-bin.stable.latest.default
               rust-analyzer
-              tinyxxd
+              parted
             ];
           };
       }
