@@ -8,8 +8,10 @@ use zerocopy::{FromBytes, Immutable, IntoBytes, little_endian::U32};
 pub struct GenericMbr {
     unused: [u8; 446],
     pub partition_entries: [PartitionEntry; 4],
-    boot_signature: [u8; 2],
+    pub boot_signature: [u8; 2],
 }
+
+pub const BOOT_SIGNATURE: [u8; 2] = [0x55, 0xAA];
 
 #[repr(C)]
 #[derive(Debug, FromBytes, IntoBytes, Immutable)]
